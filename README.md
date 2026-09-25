@@ -8,11 +8,10 @@ Separate learning repository for preparing SQL, Data Science, and Machine Learni
 
 Only **SQL Fundamentals** is completed so far.
 
-SQL fundamentals covered:
+Covered:
 
 - SELECT
-- selecting required columns
-- WHERE filtering
+- WHERE
 - GROUP BY
 - COUNT
 - SUM
@@ -20,7 +19,7 @@ SQL fundamentals covered:
 - HAVING
 - basic gateway-level aggregation
 
-LPDG-style gateway telemetry columns:
+LPDG-style telemetry columns:
 
 - gateway_id
 - timestamp
@@ -37,35 +36,92 @@ SELECT
 -> CALCULATE
 -> PRESENT
 
+## Next Learning Day
+
+### Day 02 - SQL JOINs
+
+**Goal:** Learn how to combine different LPDG data sources.
+
+LPDG example tables:
+
+**telemetry**
+- gateway_id
+- timestamp
+- offline_duration
+- disconnection_count
+- reboot_count
+- rssi
+
+**gateway_master**
+- gateway_id
+- gateway_name
+- location
+- gateway_type
+- installation_date
+
+Learn:
+
+1. INNER JOIN
+2. LEFT JOIN
+3. ON condition
+4. joining using gateway_id
+5. one-to-one vs one-to-many relationships
+6. filtering after a JOIN
+7. GROUP BY after a JOIN
+8. avoiding duplicate rows after a JOIN
+
+### Day 02 Practice Questions
+
+1. Show telemetry records with gateway names.
+2. Show all gateways, including gateways with no telemetry.
+3. Find average offline duration by gateway name.
+4. Find total disconnections by gateway location.
+5. Find gateways with average offline duration greater than 30 minutes.
+6. Count telemetry records for each gateway.
+7. Identify gateways that exist in the master table but have no telemetry records.
+
+### Expected Learning
+
+Understand this flow:
+
+telemetry
++
+gateway_master
+↓
+JOIN using gateway_id
+↓
+combined gateway information
+↓
+FILTER / GROUP BY
+↓
+useful LPDG metric
+
 ## SQL Roadmap
 
 ### SQL 01 - Fundamentals
-- SELECT
-- WHERE
-- GROUP BY
-- COUNT
-- SUM
-- AVG
-- HAVING
-
 **Status: COMPLETED**
 
 ### SQL 02 - JOINs
-- INNER JOIN
-- LEFT JOIN
-- joining gateway telemetry with gateway master data
-- understanding one-to-one and one-to-many relationships
-
 **Status: NEXT**
 
+- INNER JOIN
+- LEFT JOIN
+- ON
+- one-to-one
+- one-to-many
+- JOIN + WHERE
+- JOIN + GROUP BY
+
 ### SQL 03 - CTEs
+**Status: UPCOMING**
+
 - WITH
 - breaking a large query into steps
 - preparing intermediate datasets
 
+### SQL 04 - Window Functions
 **Status: UPCOMING**
 
-### SQL 04 - Window Functions
 - ROW_NUMBER
 - RANK
 - LAG
@@ -74,9 +130,9 @@ SELECT
 - AVG() OVER
 - PARTITION BY
 
+### SQL 05 - Advanced SQL
 **Status: UPCOMING**
 
-### SQL 05 - Advanced SQL
 - CASE WHEN
 - subqueries
 - EXISTS / NOT EXISTS
@@ -85,15 +141,11 @@ SELECT
 - date and time functions
 - conditional aggregation
 
-**Status: UPCOMING**
-
 ## ML Roadmap
 
-ML starts after the required Python/Pandas foundation, but the concepts will be introduced using the LPDG problem.
+ML will be learned separately and then connected to the LPDG challenge.
 
-### ML 01 - ML Fundamentals
-Understand:
-
+### ML 01 - Fundamentals
 - feature
 - label / target
 - training data
@@ -104,17 +156,6 @@ Understand:
 - regression
 - risk score
 
-LPDG example:
-
-Features:
-- offline_duration
-- disconnection_count
-- reboot_count
-- rssi
-
-Target:
-- gateway problem / no problem
-
 ### ML 02 - Data Preparation
 - missing values
 - duplicates
@@ -124,7 +165,7 @@ Target:
 - encoding
 - train/validation/test split
 
-### ML 03 - Exploratory Data Analysis
+### ML 03 - EDA
 - distributions
 - correlations
 - feature relationships
@@ -132,14 +173,7 @@ Target:
 - gateway-level patterns
 - time-based patterns
 
-Tools:
-- Pandas
-- NumPy
-- Matplotlib
-
 ### ML 04 - Feature Engineering
-Create LPDG-style features:
-
 - avg_offline_duration
 - total_disconnections
 - reboot_frequency
@@ -149,17 +183,13 @@ Create LPDG-style features:
 - rolling averages
 
 ### ML 05 - Classification
-Learn:
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- Gradient Boosting
+- LightGBM
 
-1. Logistic Regression
-2. Decision Tree
-3. Random Forest
-4. Gradient Boosting
-5. LightGBM
-
-### ML 06 - Model Evaluation
-Learn:
-
+### ML 06 - Evaluation
 - confusion matrix
 - accuracy
 - precision
@@ -170,11 +200,6 @@ Learn:
 - threshold selection
 - false positives
 - false negatives
-
-LPDG connection:
-
-- false positive -> unnecessary technician visit
-- false negative -> missed gateway problem
 
 ### ML 07 - Time-Based Validation
 Past weeks -> training
@@ -192,8 +217,6 @@ Telemetry
 
 ## Current LPDG Part 1 Connection
 
-The existing challenge flow is:
-
 Telemetry
 -> Features
 -> LightGBM
@@ -201,7 +224,7 @@ Telemetry
 -> Rank
 -> Top 15 Gateways
 
-The learning repository is for learning each concept step-by-step before applying it to the actual challenge.
+This learning repository is for understanding each component step-by-step before applying it to the actual challenge.
 
 ## Repository Structure
 
